@@ -1,5 +1,7 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+(use-package cmake-mode)
+
 (use-package fic-mode
   :init
   (progn
