@@ -274,4 +274,57 @@
     )
   )
 
+(use-package org
+  :bind
+  (("C-c o" . org-open-at-point-global))
+  :config
+  (setq org-descriptive-links nil)
+  (setq org-log-done 'time)
+  (setq org-startup-folded nil)
+  (setq org-yank-folded-subtrees nil)
+  (setcar (nthcdr 2 org-emphasis-regexp-components) " \t\r\n")
+  (org-set-emph-re 'org-emphasis-regexp-components org-emphasis-regexp-components)
+  (setq org-export-backends (append '(man) org-export-backends))
+  (define-key org-mode-map (kbd "C-j") (lambda()
+                                         (interactive)
+                                         (join-line -1)))
+
+  (setq org-todo-keywords
+        '((sequence "TODO(t)" "STARTED(s)" "|" "DONE(d)" "CANCELED(c)")))
+  (setq org-todo-keyword-faces
+        '(("TODO" . org-todo) ("CANCELED" . org-warning) ("STARTED" . (:foreground "white" :background "red"))))
+
+  ;; highlight
+  (setq org-src-fontify-natively t)
+  (setq org-fontify-whole-heading-line t)
+
+  (set-face-attribute 'org-level-1 nil
+                      :height 1.3 :weight 'bold :overline "#A7A7A7"
+                      :foreground "#3C3C3C" :background "#F0F0F0")
+  (set-face-attribute 'org-level-2 nil
+                      :height 1.0 :weight 'bold :overline "#123555"
+                      :foreground "#123555" :background "#E5F4FB")
+  (set-face-attribute 'org-level-3 nil
+                      :height 1.0 :weight 'bold
+                      :foreground "#005522" :background "#EFFFEF")
+  (set-face-attribute 'org-level-4 nil
+                      :height 1.0 :weight 'bold :slant 'normal
+                      :foreground "#EA6300")
+
+  (set-face-attribute 'org-block nil :inherit 'shadow
+                      :background "#FFFFE0")
+  (set-face-attribute 'org-block-begin-line nil :inherit 'org-meta-line
+                      :underline "#A7A6AA"
+                      :foreground "#555555" :background "#E2E1D5")
+  (set-face-attribute 'org-block-end-line nil :inherit 'org-meta-line
+                      :overline "#A7A6AA"
+                      :foreground "#555555" :background "#E2E1D5")
+  (set-face-attribute 'org-document-title nil
+                      :family "Sans Serif" :height 1.8 :weight 'bold
+                      :foreground "black")
+  (set-face-attribute 'org-document-info-keyword nil
+                      :foreground "#008ED1" :background "#EAEAFF")
+  )
+
+
 ;;; packages.el ends here
